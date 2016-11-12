@@ -1,8 +1,8 @@
 ## Introduction
 
-![Demo](Demo.gif)
-
 Simple loading HUD.
+
+![Demo](Demo.gif)
 
 ## Installation
 
@@ -40,14 +40,14 @@ import DTMessageHUD
 
 ### Use
 
-```
+```swift
 DTMessageHUD.show()
 DTMessageHUD.dismiss()
 ```
 
 ### Customize
 
-```
+```swift
 DTMessageHUD.setStyle(.light) // Light is default style
 DTMessageHUD.setStyle(.dark)
 ```
