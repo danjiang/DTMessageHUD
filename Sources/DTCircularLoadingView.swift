@@ -8,21 +8,29 @@
 
 import UIKit
 
-class DTCircularLoadingView: UIView {
+public class DTCircularLoadingView: UIView {
   
   fileprivate var animatedLayer: CAShapeLayer?
+  fileprivate var insetX: CGFloat
+  fileprivate var insetY: CGFloat
+  fileprivate var lineWidth: CGFloat
   fileprivate var strokeColor: UIColor
   
-  required init?(coder aDecoder: NSCoder) {
+  fileprivate let rotationKey = "rotation"
+  
+  public required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
 
-  init(frame: CGRect, strokeColor: UIColor) {
+  public init(frame: CGRect, insetX: CGFloat, insetY: CGFloat, lineWidth: CGFloat, strokeColor: UIColor) {
+    self.insetX = insetX
+    self.insetY = insetY
+    self.lineWidth = lineWidth
     self.strokeColor = strokeColor
     super.init(frame: frame)
   }
   
-  override func willMove(toSuperview newSuperview: UIView?) {
+  public override func willMove(toSuperview newSuperview: UIView?) {
     if let _ = newSuperview {
       if let animatedLayer = animatedLayer {
         layer.addSublayer(animatedLayer)
@@ -36,22 +44,15 @@ class DTCircularLoadingView: UIView {
     }
   }
   
-  // MARK: - Private
+  public var isAnimating :Bool {
+    if let _ = animatedLayer?.mask?.animation(forKey: rotationKey) {
+      return true
+    } else {
+      return false
+    }
+  }
   
-  fileprivate func makeAnimatedLayer() -> CAShapeLayer {
-    let path = UIBezierPath(ovalIn: frame.insetBy(dx: 20, dy: 20))
-    
-    let animatedLayer = CAShapeLayer()
-    animatedLayer.frame = frame
-    animatedLayer.fillColor = UIColor.clear.cgColor
-    animatedLayer.strokeColor = strokeColor.cgColor
-    animatedLayer.lineWidth = 4
-    animatedLayer.path = path.cgPath
-    
-    let maskLayer = CALayer()
-    maskLayer.contents = imageWithName("angle-mask")?.cgImage
-    maskLayer.frame = frame
-    
+  public func startAnimation() {
     let rotation = CABasicAnimation(keyPath: "transform.rotation")
     rotation.fromValue = 0
     rotation.toValue = Double.pi * 2
@@ -62,16 +63,33 @@ class DTCircularLoadingView: UIView {
     rotation.fillMode = kCAFillModeForwards
     rotation.autoreverses = false
     
-    maskLayer.add(rotation, forKey: "rotation")
+    animatedLayer?.mask?.add(rotation, forKey: rotationKey)
+  }
+  
+  public func stopAnimation() {
+    animatedLayer?.mask?.removeAnimation(forKey: rotationKey)
+  }
+  
+  // MARK: - Private
+  
+  fileprivate func makeAnimatedLayer() -> CAShapeLayer {
+    let path = UIBezierPath(ovalIn: frame.insetBy(dx: insetX, dy: insetY))
+    
+    let animatedLayer = CAShapeLayer()
+    animatedLayer.frame = frame
+    animatedLayer.fillColor = UIColor.clear.cgColor
+    animatedLayer.strokeColor = strokeColor.cgColor
+    animatedLayer.lineWidth = lineWidth
+    animatedLayer.path = path.cgPath
+    
+    let maskLayer = CALayer()
+    maskLayer.contents = DTMessageHUD.imageWithName("angle-mask")?.cgImage
+    maskLayer.frame = frame
     
     animatedLayer.mask = maskLayer
 
     return animatedLayer
   }
   
-  fileprivate func imageWithName(_ name: String) -> UIImage? {
-    let bundle = Bundle(for: DTCircularLoadingView.self)
-    return UIImage(named: name, in: bundle, compatibleWith: nil)
-  }
   
 }

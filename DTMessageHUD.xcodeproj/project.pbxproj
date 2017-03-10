@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4009E6261E700E3F0065E00A /* DTMessageHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4009E6251E700E3F0065E00A /* DTMessageHUD.bundle */; };
 		40501B481DD35C3B00D893FB /* DTCircularLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40501B471DD35C3B00D893FB /* DTCircularLoadingView.swift */; };
 		4081ACA21DD20633001994C4 /* DTMessageHUD.h in Headers */ = {isa = PBXBuildFile; fileRef = 4081ACA11DD20633001994C4 /* DTMessageHUD.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4081ACDA1DD20893001994C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4081ACD91DD20893001994C4 /* AppDelegate.swift */; };
@@ -16,12 +17,10 @@
 		4081ACE41DD20894001994C4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4081ACE21DD20894001994C4 /* LaunchScreen.storyboard */; };
 		4081ACE91DD20897001994C4 /* DTMessageHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4081AC641DD20386001994C4 /* DTMessageHUD.framework */; };
 		4081ACEB1DD20A7E001994C4 /* DTMessageHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4081ACEA1DD20A7E001994C4 /* DTMessageHUD.swift */; };
-		40FD79E71DD4A8B3009E7B50 /* angle-mask.png in Resources */ = {isa = PBXBuildFile; fileRef = 40FD79E41DD4A8B3009E7B50 /* angle-mask.png */; };
-		40FD79E81DD4A8B3009E7B50 /* angle-mask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 40FD79E51DD4A8B3009E7B50 /* angle-mask@2x.png */; };
-		40FD79E91DD4A8B3009E7B50 /* angle-mask@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 40FD79E61DD4A8B3009E7B50 /* angle-mask@3x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4009E6251E700E3F0065E00A /* DTMessageHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DTMessageHUD.bundle; sourceTree = "<group>"; };
 		40501B471DD35C3B00D893FB /* DTCircularLoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DTCircularLoadingView.swift; sourceTree = "<group>"; };
 		4081AC641DD20386001994C4 /* DTMessageHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DTMessageHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4081AC9B1DD2052A001994C4 /* Info-iOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-iOS.plist"; sourceTree = "<group>"; };
@@ -34,9 +33,6 @@
 		4081ACE31DD20894001994C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4081ACE51DD20894001994C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4081ACEA1DD20A7E001994C4 /* DTMessageHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DTMessageHUD.swift; sourceTree = "<group>"; };
-		40FD79E41DD4A8B3009E7B50 /* angle-mask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "angle-mask.png"; sourceTree = "<group>"; };
-		40FD79E51DD4A8B3009E7B50 /* angle-mask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "angle-mask@2x.png"; sourceTree = "<group>"; };
-		40FD79E61DD4A8B3009E7B50 /* angle-mask@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "angle-mask@3x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,9 +79,7 @@
 				4081ACA11DD20633001994C4 /* DTMessageHUD.h */,
 				4081ACEA1DD20A7E001994C4 /* DTMessageHUD.swift */,
 				40501B471DD35C3B00D893FB /* DTCircularLoadingView.swift */,
-				40FD79E41DD4A8B3009E7B50 /* angle-mask.png */,
-				40FD79E51DD4A8B3009E7B50 /* angle-mask@2x.png */,
-				40FD79E61DD4A8B3009E7B50 /* angle-mask@3x.png */,
+				4009E6251E700E3F0065E00A /* DTMessageHUD.bundle */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -159,7 +153,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0820;
 				TargetAttributes = {
 					4081AC631DD20386001994C4 = {
 						CreatedOnToolsVersion = 8.1;
@@ -197,9 +191,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				40FD79E81DD4A8B3009E7B50 /* angle-mask@2x.png in Resources */,
-				40FD79E71DD4A8B3009E7B50 /* angle-mask.png in Resources */,
-				40FD79E91DD4A8B3009E7B50 /* angle-mask@3x.png in Resources */,
+				4009E6261E700E3F0065E00A /* DTMessageHUD.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,12 +251,48 @@
 		4081AC4F1DD2030A001994C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
 			};
 			name = Debug;
 		};
 		4081AC501DD2030A001994C4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
 			};
 			name = Release;
 		};
@@ -290,7 +318,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -356,7 +384,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
