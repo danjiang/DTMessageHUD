@@ -10,13 +10,13 @@ import UIKit
 
 public class DTCircularLoadingView: UIView {
   
-  fileprivate var animatedLayer: CAShapeLayer?
-  fileprivate var insetX: CGFloat
-  fileprivate var insetY: CGFloat
-  fileprivate var lineWidth: CGFloat
-  fileprivate var strokeColor: UIColor
+  private var animatedLayer: CAShapeLayer?
+  private var insetX: CGFloat
+  private var insetY: CGFloat
+  private var lineWidth: CGFloat
+  private var strokeColor: UIColor
   
-  fileprivate let rotationKey = "rotation"
+  private let rotationKey = "rotation"
   
   public required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
@@ -72,7 +72,7 @@ public class DTCircularLoadingView: UIView {
   
   // MARK: - Private
   
-  fileprivate func makeAnimatedLayer() -> CAShapeLayer {
+  private func makeAnimatedLayer() -> CAShapeLayer {
     let path = UIBezierPath(ovalIn: frame.insetBy(dx: insetX, dy: insetY))
     
     let animatedLayer = CAShapeLayer()
@@ -90,6 +90,5 @@ public class DTCircularLoadingView: UIView {
 
     return animatedLayer
   }
-  
   
 }

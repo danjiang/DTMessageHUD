@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -43,6 +43,14 @@
                                 </segments>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </segmentedControl>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Tkb-99-yKG">
+                                <rect key="frame" x="94" y="100" width="187" height="29"/>
+                                <segments>
+                                    <segment title="Window"/>
+                                    <segment title="Current View"/>
+                                </segments>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g3Y-S3-pgt">
                                 <rect key="frame" x="305" y="617" width="34" height="30"/>
                                 <state key="normal" title="Start">
@@ -60,9 +68,20 @@
                                     <action selector="show:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xps-RA-Sas"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wHN-IW-jmq">
+                                <rect key="frame" x="87.5" y="358" width="200" height="200"/>
+                                <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="fFc-Rm-tkc"/>
+                                    <constraint firstAttribute="height" constant="200" id="g4b-5j-izE"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="Tkb-99-yKG" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="188-5o-A3Z"/>
+                            <constraint firstItem="Tkb-99-yKG" firstAttribute="top" secondItem="fCc-Ks-452" secondAttribute="bottom" constant="8" id="3ZP-1W-LX7"/>
+                            <constraint firstItem="g3Y-S3-pgt" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="53Y-3n-eNZ"/>
                             <constraint firstItem="lKW-36-zF5" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="FO4-hK-bfj"/>
                             <constraint firstAttribute="trailingMargin" secondItem="g3Y-S3-pgt" secondAttribute="trailing" constant="20" id="GgY-AJ-xjD"/>
                             <constraint firstItem="JU2-H7-StD" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="MHg-zT-8rb"/>
@@ -71,13 +90,17 @@
                             <constraint firstItem="JU2-H7-StD" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="giD-M8-dbo"/>
                             <constraint firstItem="lKW-36-zF5" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="h8a-ln-7qH"/>
                             <constraint firstItem="fCc-Ks-452" firstAttribute="top" secondItem="JU2-H7-StD" secondAttribute="bottom" constant="8" id="hcr-38-qqT"/>
+                            <constraint firstItem="wHN-IW-jmq" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="i0e-Ww-pMs"/>
+                            <constraint firstItem="wHN-IW-jmq" firstAttribute="top" secondItem="lKW-36-zF5" secondAttribute="bottom" constant="10" id="tlu-UQ-BWn"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="g3Y-S3-pgt" secondAttribute="bottom" constant="20" id="wYl-Or-WfR"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="boxView" destination="wHN-IW-jmq" id="96D-t3-mrq"/>
                         <outlet property="startButton" destination="g3Y-S3-pgt" id="Fok-sq-oeA"/>
                         <outlet property="styleSegmentedControl" destination="fCc-Ks-452" id="eRN-k7-Wd5"/>
                         <outlet property="themeSegmentedControl" destination="JU2-H7-StD" id="rCJ-AH-QiK"/>
+                        <outlet property="viewSegmentedControl" destination="Tkb-99-yKG" id="BiI-hx-IJa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -194,105 +194,124 @@ public class DTMessageHUD: UIView {
     case custom
   }
   
-  fileprivate static let defaultWidth: CGFloat = 100
-  fileprivate static let defaultHeight: CGFloat = 100
+  private static let sharedView = DTMessageHUD()
+  private static let indicatorView = IndicatorView()
   
-  fileprivate static let sharedView = DTMessageHUD(frame: CGRect(x: 0, y: 0, width: defaultWidth, height: defaultHeight))
-  fileprivate static let overlayView = UIView()
-  
-  public required init?(coder aDecoder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-  
-  public override init(frame: CGRect) {
-    super.init(frame: frame)
-    
-    layer.cornerRadius = 10
-  }
-  
-  public class func hud() {
-    show(style: .hud)
-  }
-  
-  public class func success() {
-    show(style: .success)
-  }
-  
-  public class func info() {
-    show(style: .info)
-  }
-
-  public class func warning() {
-    show(style: .warning)
-  }
-
-  public class func error() {
-    show(style: .error)
-  }
-  
-  public class func custom(_ image: UIImage) {
-    show(style: .custom, image: image)
-  }
-  
-  public class func dismiss() {
+  @objc public func hide() {
     UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
-      DTMessageHUD.overlayView.alpha = 0
-      DTMessageHUD.sharedView.alpha = 0
+      self.alpha = 0
     }, completion: { _ in
-      DTMessageHUD.overlayView.removeFromSuperview()
-      DTMessageHUD.sharedView.removeFromSuperview()
+      self.removeFromSuperview()
     })
   }
   
-  func autoDismiss() {
-    DTMessageHUD.dismiss()
+  public class func hud(inView view: UIView? = nil) {
+    show(inView: view, style: .hud)
+  }
+
+  public class func success(inView view: UIView? = nil) {
+    show(inView: view, style: .success)
   }
   
-  public static func imageWithName(_ name: String) -> UIImage? {
+  public class func info(inView view: UIView? = nil) {
+    show(inView: view, style: .info)
+  }
+
+  public class func warning(inView view: UIView? = nil) {
+    show(inView: view, style: .warning)
+  }
+
+  public class func error(inView view: UIView? = nil) {
+    show(inView: view, style: .error)
+  }
+  
+  public class func custom(image: UIImage, inView view: UIView? = nil) {
+    show(inView: view, style: .custom, image: image)
+  }
+  
+  public class func dismiss(inView view: UIView? = nil) {
+    if let view = view {
+      messageView(inView: view)?.hide()
+    } else {
+      DTMessageHUD.sharedView.hide()
+    }
+  }
+  
+  private class func messageView(inView view: UIView) -> DTMessageHUD? {
+    for subview in view.subviews.reversed() {
+      if subview.isKind(of: DTMessageHUD.self) {
+        return subview as? DTMessageHUD
+      }
+    }
+    return nil
+  }
+  
+  public class func imageWithName(_ name: String) -> UIImage? {
     let bundle = Bundle(for: DTMessageHUD.self)
     let url = bundle.url(forResource: "DTMessageHUD", withExtension: "bundle")!
     let imageBundle = Bundle(url: url)
     return UIImage(named: name, in: imageBundle, compatibleWith: nil)
   }
   
-  fileprivate class func show(style: Style, image: UIImage? = nil) {
-    if let _ = DTMessageHUD.sharedView.superview {
-      return
-    }
-    
-    if let w = UIApplication.shared.delegate?.window, let window = w {
-      DTMessageHUD.sharedView.customize(style: style, image: image)
-      
-      DTMessageHUD.sharedView.center = window.center
-      window.addSubview(DTMessageHUD.sharedView)
-      
-      if style == .hud {
-        DTMessageHUD.overlayView.frame = window.frame
-        window.insertSubview(DTMessageHUD.overlayView, belowSubview: DTMessageHUD.sharedView)
-      }
-      
-      DTMessageHUD.overlayView.alpha = 0
-      DTMessageHUD.sharedView.alpha = 0
-      
-      UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
-        DTMessageHUD.overlayView.alpha = 1
-        DTMessageHUD.sharedView.alpha = 1
-      }, completion: { finished in
-        if style != .hud {
-          Timer.scheduledTimer(timeInterval: 2, target: DTMessageHUD.sharedView, selector: #selector(autoDismiss), userInfo: nil, repeats: false)
-        }
-      })
+  private class func show(inView view: UIView?, style: Style, image: UIImage? = nil) {
+    if let view = view {
+      let messageView = DTMessageHUD()
+      let indicatorView = IndicatorView()
+      show(inView: view, messageView: messageView,
+           indicatorView: indicatorView, style: style, image: image)
+    } else if let w = UIApplication.shared.delegate?.window, let window = w {
+      show(inView: window, messageView: DTMessageHUD.sharedView,
+           indicatorView: DTMessageHUD.indicatorView, style: style, image: image)
     }
   }
   
-  // MAKR: - Private
+  private class func show(inView view: UIView, messageView: DTMessageHUD,
+                          indicatorView: IndicatorView, style: Style, image: UIImage?) {
+    if let _ = messageView.superview {
+      return
+    }
+    
+    indicatorView.customize(style: style, image: image)
+    
+    messageView.frame = view.bounds
+    indicatorView.center = CGPoint(x: view.bounds.width / 2.0, y: view.bounds.height / 2.0)
+    view.addSubview(messageView)
+    messageView.addSubview(indicatorView)
+    
+    messageView.alpha = 0
+    
+    UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
+      messageView.alpha = 1
+    }, completion: { finished in
+      if style != .hud {
+        Timer.scheduledTimer(timeInterval: 2, target: messageView, selector: #selector(hide), userInfo: nil, repeats: false)
+      }
+    })
+  }
   
-  fileprivate func customize(style: Style, image: UIImage?) {
-    subviews.forEach { $0.removeFromSuperview() }
+}
 
+private class IndicatorView: UIView {
+  
+  private static let defaultWidth: CGFloat = 100
+  private static let defaultHeight: CGFloat = 100
+  
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+
+  init() {
+    super.init(frame: CGRect(x: 0, y: 0, width: IndicatorView.defaultWidth, height: IndicatorView.defaultHeight))
+    
+    layer.cornerRadius = 10
+  }
+  
+  func customize(style: DTMessageHUD.Style, image: UIImage?) {
+    subviews.forEach { $0.removeFromSuperview() }
+    
     if style == .hud {
       backgroundColor = DTMessageHUD.theme.hudBackgroundColor
-      let loadingView = DTCircularLoadingView(frame: CGRect(x: 0, y: 0, width: DTMessageHUD.defaultWidth, height: DTMessageHUD.defaultHeight),
+      let loadingView = DTCircularLoadingView(frame: CGRect(x: 0, y: 0, width: IndicatorView.defaultWidth, height: IndicatorView.defaultHeight),
                                               insetX: 20,
                                               insetY: 20,
                                               lineWidth: 4,

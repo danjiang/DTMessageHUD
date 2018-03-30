@@ -13,7 +13,9 @@ class ViewController: UIViewController {
   
   @IBOutlet weak var themeSegmentedControl: UISegmentedControl!
   @IBOutlet weak var styleSegmentedControl: UISegmentedControl!
+  @IBOutlet weak var viewSegmentedControl: UISegmentedControl!
   @IBOutlet weak var startButton: UIButton!
+  @IBOutlet weak var boxView: UIView!
   
   private let loadingView = DTCircularLoadingView(frame: CGRect(x: 0, y: 0, width: 40, height: 40),
                                           insetX: 3,
@@ -39,29 +41,39 @@ class ViewController: UIViewController {
   
   @IBAction func show(_ sender: Any) {
     switch themeSegmentedControl.selectedSegmentIndex {
-      case 1:
-        DTMessageHUD.theme = DTMessageHUD.DarkTheme()
-      case 2:
-        DTMessageHUD.theme = DTMessageHUD.ColorfulTheme()
-      default:
-        DTMessageHUD.theme = DTMessageHUD.LightTheme()
+    case 1:
+      DTMessageHUD.theme = DTMessageHUD.DarkTheme()
+    case 2:
+      DTMessageHUD.theme = DTMessageHUD.ColorfulTheme()
+    default:
+      DTMessageHUD.theme = DTMessageHUD.LightTheme()
     }
-    
+
+    switch viewSegmentedControl.selectedSegmentIndex {
+    case 1:
+      showInView(view: boxView)
+    default:
+      showInView(view: nil)      
+    }
+  }
+  
+  func showInView(view: UIView?) {
     switch styleSegmentedControl.selectedSegmentIndex {
     case 1:
-      DTMessageHUD.success()
+      DTMessageHUD.success(inView: view)
     case 2:
-      DTMessageHUD.info()
+      DTMessageHUD.info(inView: view)
     case 3:
-      DTMessageHUD.warning()
+      DTMessageHUD.warning(inView: view)
     case 4:
-      DTMessageHUD.error()
+      DTMessageHUD.error(inView: view)
     case 5:
-      DTMessageHUD.custom(#imageLiteral(resourceName: "dollar"))
+      DTMessageHUD.custom(image: #imageLiteral(resourceName: "dollar"))
+      DTMessageHUD.custom(image: #imageLiteral(resourceName: "dollar"), inView: boxView)
     default:
-      DTMessageHUD.hud()
+      DTMessageHUD.hud(inView: view)
       Timer.scheduledTimer(withTimeInterval: 3, repeats: false, block: { _ in
-        DTMessageHUD.dismiss()
+        DTMessageHUD.dismiss(inView: view)
       })
     }
   }
